@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+    php7:
+        build: ./docker/php7
+        volumes:
+            - ./pimcore:/pimcore
+        environment:
+          - PHP_VERSION=7
+          - PIMCORE_ENVIRONMENT=test
+          - PIMCORE_TEST=1
+          - PIMCORE_TEST_DB_DSN=mysql://db:db@db/db
+          - PIMCORE_TEST_CACHE_REDIS_SERVER=redis
+          - PIMCORE_TEST_CACHE_REDIS_DATABASE=1
+
+    php72:
+        extends:
+          service: php7
+        build: ./docker/php72
+
+    db:
+      image: mariadb:10.1
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=db
+        - MYSQL_USER=db
+        - MYSQL_PASSWORD=db
+
+    redis:
+        image: redis:latest
