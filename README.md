@@ -22,16 +22,18 @@ $ cd pimcore-docker-test-setup
 $ git clone git@github.com:pimcore/pimcore.git
 
 # composer dependencies are not installed when running tests so you need to do it before running tests
-$ composer install
+$ (cd pimcore && composer install)
 ```
 
 Now you can run the test suite either on one of the configured PHP images. Currently the following images are available:
 
-* `php7`
-* `php72`
+* `php7`: latest PHP 7 (7.1 currently)
+* `php72`: latest PHP 7.2 RC
 
 ```bash
 $ docker-compose up -d
+
+# you might need to wait a couple of seconds until DB and Redis are ready
 $ docker-compose exec php7 vendor/bin/codecept run -c pimcore
 
 # of course, you can limit the tests to just a single suite or group
