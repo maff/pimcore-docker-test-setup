@@ -1,8 +1,8 @@
 version: '2'
 
 services:
-    php7:
-        build: ./docker/php7
+    php70:
+        build: ./docker/php70
         volumes:
             - ./pimcore:/pimcore
         environment:
@@ -14,9 +14,14 @@ services:
             - PIMCORE_TEST_CACHE_REDIS_SERVER=redis
             - PIMCORE_TEST_CACHE_REDIS_DATABASE=1
 
+    php71:
+        extends:
+            service: php70
+        build: ./docker/php71
+
     php72:
         extends:
-            service: php7
+            service: php70
         build: ./docker/php72
 
     db:
